@@ -18,7 +18,7 @@ class RoleMiddleware
             return redirect()->route('login');
         }
 
-        if (!in_array($request->user()->role, $roles)) {
+        if ($request->user()->role !== 'admin' && !in_array($request->user()->role, $roles)) {
             abort(403, 'Akses ditolak. Anda tidak memiliki izin untuk halaman ini.');
         }
 

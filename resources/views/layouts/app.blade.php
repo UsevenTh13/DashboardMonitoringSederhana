@@ -169,6 +169,24 @@
                     Riwayat Pasien
                 </span>
             </a>
+
+            {{-- MANAJEMEN PENGGUNA (Khusus Admin) --}}
+            @if(Auth::user()->isAdmin())
+            @php $isUsers = request()->routeIs('users.index'); @endphp
+            <a href="{{ route('users.index') }}"
+               class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-200 group mt-4
+                      {{ $isUsers ? 'bg-white shadow-lg' : 'hover:bg-white/10' }}">
+                <div class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 transition-all duration-200
+                            {{ $isUsers ? 'bg-indigo-600 shadow-md' : 'bg-white/10 group-hover:bg-white/20' }}">
+                    <svg class="w-[18px] h-[18px] {{ $isUsers ? 'text-white' : 'text-blue-200' }}" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
+                    </svg>
+                </div>
+                <span class="text-sm font-semibold leading-none {{ $isUsers ? 'text-brand-700' : 'text-blue-100 group-hover:text-white' }}">
+                    Manajemen Pengguna
+                </span>
+            </a>
+            @endif
         </nav>
 
         <!-- ===== USER INFO ===== -->
@@ -182,7 +200,10 @@
                 <div class="flex-1 min-w-0">
                     <p class="text-white text-xs font-semibold truncate leading-snug">{{ Auth::user()->name }}</p>
                     <div class="flex items-center gap-1 mt-0.5">
-                        @if(Auth::user()->isPerawat())
+                        @if(Auth::user()->isAdmin())
+                            <span class="w-1.5 h-1.5 rounded-full bg-purple-400 flex-shrink-0"></span>
+                            <span class="text-[11px] font-medium text-purple-300">Admin</span>
+                        @elseif(Auth::user()->isPerawat())
                             <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 flex-shrink-0"></span>
                             <span class="text-[11px] font-medium text-emerald-300">Perawat</span>
                         @else

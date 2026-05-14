@@ -47,11 +47,16 @@ class User extends Authenticatable
 
     public function isDokter(): bool
     {
-        return $this->role === 'dokter';
+        return in_array($this->role, ['dokter', 'admin']);
     }
 
     public function isPerawat(): bool
     {
-        return $this->role === 'perawat';
+        return in_array($this->role, ['perawat', 'admin']);
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->role === 'admin';
     }
 }

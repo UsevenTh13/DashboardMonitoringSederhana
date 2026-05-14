@@ -20,7 +20,7 @@ Dibangun menggunakan **Laravel 12**, **Livewire 3**, dan **Tailwind CSS**.
 
 ## Prasyarat (Requirements)
 
-Sebelum menjalankan aplikasi, pastikan sistem Anda memiliki perangkat lunak berikut:
+Sebelum menjalankan aplikasi, pasftikan sistem Anda memiliki perangkat lunak berikut:
 - PHP >= 8.2
 - Composer
 - MySQL / MariaDB (via Laragon / XAMPP)

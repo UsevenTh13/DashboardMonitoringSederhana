@@ -14,6 +14,15 @@ class DatabaseSeeder extends Seeder
     {
         // === BUAT USER ===
 
+        // Admin
+        $admin = User::create([
+            'name'     => 'Administrator RS',
+            'email'    => 'admin@rsarifin.id',
+            'password' => Hash::make('password123'),
+            'role'     => 'admin',
+            'no_hp'    => '080000000000',
+        ]);
+
         // Admin / Perawat
         $perawat1 = User::create([
             'name'     => 'Sari Dewi, S.Kep',

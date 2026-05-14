@@ -61,6 +61,13 @@ Route::middleware(['auth'])->group(function () {
         return view('patients.history');
     })->name('history');
 
+    // Halaman Manajemen Pengguna (Khusus Admin)
+    Route::middleware('role:admin')->group(function () {
+        Route::get('/users', function () {
+            return view('users.index');
+        })->name('users.index');
+    });
+
     // Profile sederhana
     Route::get('/profile', function () {
         return view('profile');
