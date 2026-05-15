@@ -69,6 +69,9 @@
                         <th class="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">DPJP</th>
                         <th class="px-4 py-3 text-center text-xs font-semibold text-slate-500 uppercase tracking-wider">LOS (Hari)</th>
                         <th class="px-4 py-3 text-center text-xs font-semibold text-slate-500 uppercase tracking-wider">Kelebihan</th>
+                        @if(auth()->user()->isPerawat())
+                        <th class="px-4 py-3 text-center text-xs font-semibold text-slate-500 uppercase tracking-wider">Aksi</th>
+                        @endif
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-slate-100">
@@ -103,10 +106,23 @@
                                 +{{ $patient->los - 5 }} hari
                             </span>
                         </td>
+                        @if(auth()->user()->isPerawat())
+                        <td class="px-4 py-3 text-center">
+                            <button
+                                wire:click="$dispatch('discharge-patient', { id: {{ $patient->id }} })"
+                                class="inline-flex items-center gap-1.5 bg-red-600 hover:bg-red-700 text-white text-xs font-semibold px-3 py-1.5 rounded-lg transition-colors active:scale-95"
+                                title="Pulangkan pasien ini">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                                </svg>
+                                Pulangkan
+                            </button>
+                        </td>
+                        @endif
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="9" class="px-4 py-16 text-center">
+                        <td colspan="10" class="px-4 py-16 text-center">
                             <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
                                 <svg class="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
@@ -121,4 +137,7 @@
             </table>
         </div>
     </div>
+
+    {{-- Modal discharge dipanggil dari komponen patient-form --}}
+    @livewire('patient-form')
 </div>
