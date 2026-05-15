@@ -96,6 +96,22 @@ Gunakan kredensial berikut untuk mencoba masuk ke sistem. Login kini menggunakan
 
 ---
 
+## 🚀 Deployment ke Vercel (Gratis)
+
+Aplikasi ini sudah dikonfigurasi untuk dapat di-deploy ke **Vercel** secara gratis. File konfigurasi `vercel.json` dan `api/index.php` (untuk menangani *Serverless Functions* PHP) telah disediakan.
+
+### Langkah-Langkah Deployment:
+1. **Siapkan Database Eksternal**: Vercel tidak menyediakan layanan database. Anda harus membuat database MySQL/PostgreSQL secara gratis di layanan seperti **[Supabase](https://supabase.com/)**, **[Aiven](https://aiven.io/)**, atau **[PlanetScale](https://planetscale.com/)**.
+2. **Login ke Vercel**: Buat akun dan login di [Vercel](https://vercel.com).
+3. **Hubungkan GitHub**: Klik "Add New Project" dan pilih "Import from Git Repository". Pilih repository aplikasi ini.
+4. **Konfigurasi Environment**: Sebelum klik "Deploy", buka menu "Environment Variables" dan masukkan variabel dari database eksternal Anda (seperti `DB_CONNECTION`, `DB_HOST`, `DB_PORT`, `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD`, dan `APP_KEY`).
+5. **Klik Deploy**: Tunggu proses build selesai (Vercel akan menggunakan `vercel-php` otomatis berdasarkan `vercel.json`).
+6. **Migrasi Database**: Karena Vercel adalah lingkungan *serverless*, Anda perlu menjalankan migrasi `php artisan migrate --force --seed` dari komputer Anda (lokal) yang dihubungkan ke *host* database eksternal Anda (Supabase/Aiven) sebelum aplikasi Vercel dapat digunakan.
+
+*Catatan Vercel: Fitur upload file (gambar/dokumen) secara lokal (`/storage`) tidak akan berfungsi di Vercel karena sistem file yang bersifat read-only. Namun, aplikasi pemantauan ini murni menggunakan database sehingga akan berjalan 100% lancar di Vercel.*
+
+---
+
 ## Teknologi yang Digunakan
 - [Laravel 12](https://laravel.com/) - PHP Web Framework
 - [Livewire 3](https://livewire.laravel.com/) - Full-stack framework for Laravel
