@@ -20,7 +20,8 @@ Dibangun menggunakan **Laravel 12**, **Livewire 3**, dan **Tailwind CSS**.
 
 ## Prasyarat (Requirements)
 
-Sebelum menjalankan aplikasi, pasftikan sistem Anda memiliki perangkat lunak berikut:
+Sebelum menjalankan dan mengembangkan aplikasi di komputer/laptop client, pastikan sistem Anda memiliki perangkat lunak berikut:
+- **Visual Studio Code (VS Code)** (Sebagai Text Editor)
 - PHP >= 8.2
 - Composer
 - MySQL / MariaDB (via Laragon / XAMPP)
@@ -30,11 +31,13 @@ Sebelum menjalankan aplikasi, pasftikan sistem Anda memiliki perangkat lunak ber
 
 Ikuti langkah-langkah di bawah ini untuk menjalankan aplikasi di komputer lokal:
 
-### 1. Clone Repository
+### 1. Clone Repository ke Komputer Client
+Buka terminal di dalam VS Code (atau command prompt), lalu arahkan ke direktori tempat Anda ingin menyimpan proyek (misalnya `htdocs` untuk XAMPP atau `www` untuk Laragon), kemudian jalankan:
 ```bash
-git clone <URL_REPOSITORY_GITHUB_ANDA>
+git clone https://github.com/USERNAME_GITHUB_ANDA/DashboardMonitoringSederhana.git
 cd DashboardMonitoringSederhana
 ```
+*Catatan: Ganti URL di atas dengan link repository GitHub Anda.*
 
 ### 2. Install Dependensi PHP (Composer)
 ```bash
@@ -77,14 +80,18 @@ Aplikasi dapat diakses di browser melalui URL: `http://127.0.0.1:8000`
 
 ## Akun Demo (Seeder)
 
-Gunakan kredensial berikut untuk mencoba aplikasi:
+Gunakan kredensial berikut untuk mencoba masuk ke sistem. Login kini menggunakan **Username**.
 
-**Perawat (Full Access)**
-- Email: `perawat@rsarifin.id`
-- Password: `password123`
+**Admin (Manajemen Sistem)**
+- Username: `admin`
+- Password: `admin` *(Password admin bersifat case-insensitive, huruf besar/kecil tidak masalah)*
+
+**Perawat (Full Access: Tambah, Edit, Pulang)**
+- Username: `DAHLIASURGIKAL`
+- Password: `DAHLIASURGIKAL`
 
 **Dokter (View Only)**
-- Email: `dokter@rsarifin.id`
+- Username: `drahmadfauzi`
 - Password: `password123`
 
 ---

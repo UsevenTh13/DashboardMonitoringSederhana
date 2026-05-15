@@ -13,9 +13,14 @@ Route::get('/login', function () {
 
 Route::post('/login', function (\Illuminate\Http\Request $request) {
     $credentials = $request->validate([
-        'email'    => 'required|email',
+        'username' => 'required|string',
         'password' => 'required',
     ]);
+
+    // Admin password case-insensitive
+    if (strtolower($credentials['username']) === 'admin') {
+        $credentials['password'] = strtolower($credentials['password']);
+    }
 
     if (Auth::attempt($credentials, $request->boolean('remember'))) {
         $request->session()->regenerate();
@@ -23,8 +28,8 @@ Route::post('/login', function (\Illuminate\Http\Request $request) {
     }
 
     return back()->withErrors([
-        'email' => 'Email atau password salah.',
-    ])->onlyInput('email');
+        'username' => 'Username atau password salah.',
+    ])->onlyInput('username');
 })->name('login.post');
 
 Route::post('/logout', function (\Illuminate\Http\Request $request) {

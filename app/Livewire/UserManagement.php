@@ -14,7 +14,7 @@ class UserManagement extends Component
 
     // Form fields
     public string $name = '';
-    public string $email = '';
+    public string $username = '';
     public string $password = '';
     public string $role = '';
     public string $no_hp = '';
@@ -29,15 +29,15 @@ class UserManagement extends Component
 
     protected function rules(): array
     {
-        $emailRule = $this->editingId
-            ? 'required|email|unique:users,email,' . $this->editingId
-            : 'required|email|unique:users,email';
+        $usernameRule = $this->editingId
+            ? 'required|string|unique:users,username,' . $this->editingId
+            : 'required|string|unique:users,username';
 
         $passwordRule = $this->editingId ? 'nullable|min:6' : 'required|min:6';
 
         return [
             'name'         => 'required|string|max:255',
-            'email'        => $emailRule,
+            'username'     => $usernameRule,
             'password'     => $passwordRule,
             'role'         => 'required|in:dokter,perawat',
             'no_hp'        => 'nullable|string|max:20',
@@ -47,8 +47,8 @@ class UserManagement extends Component
 
     protected $messages = [
         'name.required'     => 'Nama wajib diisi.',
-        'email.required'    => 'Email wajib diisi.',
-        'email.unique'      => 'Email sudah digunakan.',
+        'username.required' => 'Username wajib diisi.',
+        'username.unique'   => 'Username sudah digunakan.',
         'password.required' => 'Password wajib diisi untuk pengguna baru.',
         'password.min'      => 'Password minimal 6 karakter.',
         'role.required'     => 'Role wajib dipilih.',
@@ -67,7 +67,7 @@ class UserManagement extends Component
     #[On('open-create-user')]
     public function openCreate(): void
     {
-        $this->reset(['name', 'email', 'password', 'role', 'no_hp', 'spesialisasi', 'editingId']);
+        $this->reset(['name', 'username', 'password', 'role', 'no_hp', 'spesialisasi', 'editingId']);
         $this->showModal = true;
     }
 
@@ -77,7 +77,7 @@ class UserManagement extends Component
         $user = User::findOrFail($id);
         $this->editingId    = $id;
         $this->name         = $user->name;
-        $this->email        = $user->email;
+        $this->username     = $user->username;
         $this->role         = $user->role;
         $this->no_hp        = $user->no_hp ?? '';
         $this->spesialisasi = $user->spesialisasi ?? '';
@@ -104,7 +104,7 @@ class UserManagement extends Component
 
         $data = [
             'name'         => $this->name,
-            'email'        => $this->email,
+            'username'     => $this->username,
             'role'         => $this->role,
             'no_hp'        => $this->no_hp ?: null,
             'spesialisasi' => $this->spesialisasi ?: null,
@@ -144,7 +144,7 @@ class UserManagement extends Component
     public function closeModal(): void
     {
         $this->showModal = false;
-        $this->reset(['name', 'email', 'password', 'role', 'no_hp', 'spesialisasi', 'editingId']);
+        $this->reset(['name', 'username', 'password', 'role', 'no_hp', 'spesialisasi', 'editingId']);
     }
 
     public function render()
@@ -154,7 +154,7 @@ class UserManagement extends Component
         if ($this->search) {
             $query->where(function($q) {
                 $q->where('name', 'like', '%' . $this->search . '%')
-                  ->orWhere('email', 'like', '%' . $this->search . '%')
+                  ->orWhere('username', 'like', '%' . $this->search . '%')
                   ->orWhere('spesialisasi', 'like', '%' . $this->search . '%');
             });
         }

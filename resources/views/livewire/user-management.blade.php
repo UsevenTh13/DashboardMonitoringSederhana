@@ -44,7 +44,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                 </svg>
                 <input wire:model.live.debounce.300ms="search" type="text"
-                    placeholder="Cari nama, email, atau spesialisasi..."
+                    placeholder="Cari nama, username, atau spesialisasi..."
                     class="w-full pl-9 pr-4 py-2.5 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-400/30 focus:border-brand-400 transition-all">
             </div>
             <select wire:model.live="filterRole"
@@ -88,7 +88,7 @@
                             </div>
                         </td>
                         <td class="px-5 py-4">
-                            <p class="text-sm text-slate-700">{{ $user->email }}</p>
+                            <p class="text-sm text-slate-700">{{ $user->username }}</p>
                             @if($user->no_hp)
                                 <p class="text-xs text-slate-500 mt-0.5">{{ $user->no_hp }}</p>
                             @endif
@@ -185,12 +185,12 @@
                         @error('name') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
                     </div>
 
-                    <!-- Email -->
+                    <!-- Username -->
                     <div>
-                        <label class="block text-sm font-semibold text-slate-700 mb-1.5">Email <span class="text-red-500">*</span></label>
-                        <input wire:model="email" type="email" placeholder="contoh@rsarifin.id"
-                            class="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-400/30 focus:border-brand-400 transition-all @error('email') border-red-400 @enderror">
-                        @error('email') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
+                        <label class="block text-sm font-semibold text-slate-700 mb-1.5">Username <span class="text-red-500">*</span></label>
+                        <input wire:model="username" type="text" placeholder="Masukkan username"
+                            class="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-400/30 focus:border-brand-400 transition-all @error('username') border-red-400 @enderror">
+                        @error('username') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
                     </div>
 
                     <!-- No HP -->

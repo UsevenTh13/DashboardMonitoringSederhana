@@ -67,17 +67,16 @@
                         @enderror
                     </div>
 
-                    <!-- No RM -->
+                    <!-- No Rekam Medis -->
                     <div>
-                        <label class="block text-sm font-semibold text-slate-700 mb-1.5">
-                            No. Rekam Medis <span class="text-red-500">*</span>
-                        </label>
-                        <input wire:model="no_rm" type="text" id="input-no-rm"
-                            placeholder="Contoh: RM-2024-001"
-                            class="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-brand-400/30 focus:border-brand-400 transition-all @error('no_rm') border-red-400 @enderror">
-                        @error('no_rm')
-                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                        @enderror
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">No. Rekam Medis <span class="text-red-500">*</span></label>
+                        <input type="text" wire:model="no_rm" 
+                            inputmode="numeric" maxlength="8" pattern="[0-9]*"
+                            placeholder="Contoh: 12345678"
+                            oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                            class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:bg-white focus:ring-2 focus:ring-brand-400/30 focus:border-brand-400 transition-all
+                            @error('no_rm') border-red-400 bg-red-50 @enderror">
+                        @error('no_rm') <p class="mt-1.5 text-xs text-red-500 font-medium">{{ $message }}</p> @enderror
                     </div>
 
                     <!-- Kelas BPJS -->

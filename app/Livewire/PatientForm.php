@@ -33,8 +33,8 @@ class PatientForm extends Component
     protected function rules(): array
     {
         $rmRule = $this->editingId
-            ? 'required|string|max:50|unique:patients,no_rm,' . $this->editingId
-            : 'required|string|max:50|unique:patients,no_rm,NULL,id,status,aktif';
+            ? 'required|digits:8|unique:patients,no_rm,' . $this->editingId
+            : 'required|digits:8|unique:patients,no_rm';
 
         return [
             'nama_pasien'  => 'required|string|max:255',
@@ -51,7 +51,8 @@ class PatientForm extends Component
     protected $messages = [
         'nama_pasien.required'   => 'Nama pasien wajib diisi.',
         'no_rm.required'         => 'No. Rekam Medis wajib diisi.',
-        'no_rm.unique'           => 'No. RM ini sudah digunakan oleh pasien aktif lain.',
+        'no_rm.unique'           => 'No. Rekam Medis sudah terdaftar.',
+        'no_rm.digits'           => 'No. Rekam Medis harus tepat 8 digit angka.',
         'kelas_bpjs.required'    => 'Kelas BPJS wajib dipilih.',
         'kelas_bpjs.in'          => 'Kelas BPJS tidak valid.',
         'diagnosis.required'     => 'Diagnosis wajib diisi.',
