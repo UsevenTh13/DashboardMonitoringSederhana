@@ -22,12 +22,12 @@ RUN composer install \
     --no-scripts \
     --no-autoloader
 COPY . .
-RUN composer dump-autoload --optimize --no-dev
+RUN composer dump-autoload --optimize --no-dev --ignore-platform-reqs
 
 # ────────────────────────────────────────────────────────────
-# Stage 3: Production Server (PHP 8.3 + Apache)
+# Stage 3: Production Server (PHP 8.4 + Apache)
 # ────────────────────────────────────────────────────────────
-FROM php:8.3-apache
+FROM php:8.4-apache
 WORKDIR /var/www/html
 
 # Install system dependencies & PHP extensions
