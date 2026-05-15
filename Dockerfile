@@ -10,7 +10,7 @@ RUN npm run build
 FROM composer:2.6 AS vendor
 WORKDIR /app
 COPY composer.json composer.lock ./
-RUN composer install --no-dev --no-interaction --prefer-dist --ignore-platform-reqs
+RUN composer install --no-dev --no-interaction --prefer-dist --ignore-platform-reqs --no-scripts
 COPY . .
 RUN composer dump-autoload --optimize
 
