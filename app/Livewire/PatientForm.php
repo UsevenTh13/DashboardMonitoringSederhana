@@ -126,14 +126,19 @@ class PatientForm extends Component
 
     public function discharge(): void
     {
+        $patient = Patient::findOrFail($this->dischargingId);
+
         $this->validate([
-            'tanggal_keluar' => 'required|date|after_or_equal:tanggal_masuk',
+            'tanggal_keluar' => [
+                'required',
+                'date',
+                'after_or_equal:' . $patient->tanggal_masuk->format('Y-m-d'),
+            ],
         ], [
-            'tanggal_keluar.required' => 'Tanggal keluar wajib diisi.',
-            'tanggal_keluar.after_or_equal' => 'Tanggal keluar harus setelah tanggal masuk.',
+            'tanggal_keluar.required'         => 'Tanggal keluar wajib diisi.',
+            'tanggal_keluar.after_or_equal'   => 'Tanggal keluar tidak boleh sebelum tanggal masuk (' . $patient->tanggal_masuk->format('d/m/Y') . ').',
         ]);
 
-        $patient = Patient::findOrFail($this->dischargingId);
         $los = $patient->tanggal_masuk->diffInDays(Carbon::parse($this->tanggal_keluar));
 
         $patient->update([
